@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.sn.cleannotes"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    implementation AppDeps.stdlib
+    implementation AppDeps.coreKtx
+    implementation AppDeps.appcompat
+    implementation AppDeps.material
+    implementation AppDeps.constraintlayout
+    implementation AppDeps.lifecycleLiveData
+    implementation AppDeps.lifecycleRuntime
+    implementation AppDeps.lifecycleViewModel
+    implementation AppDeps.navigationFragmentKtx
+    implementation AppDeps.navigationUiKtx
+    implementation AppDeps.retrofit
+    implementation AppDeps.gsonConverter
+    implementation AppDeps.gson
+    implementation AppDeps.hilt
+    implementation AppDeps.hiltViewModel
+    kapt AppDeps.hiltCompiler
+    kapt AppDeps.hiltAndroidCompiler
+    implementation AppDeps.coroutinesCore
+    implementation AppDeps.coroutinesAndroid
+    kapt AppDeps.roomCompiler
+    implementation AppDeps.glide
+    kapt AppDeps.glideCompiler
+    implementation AppDeps.roomKtx
+    implementation AppDeps.roomRuntime
+    testImplementation AppDeps.junit
+    androidTestImplementation AppDeps.extJunit
+    androidTestImplementation AppDeps.espressoCore
+}
