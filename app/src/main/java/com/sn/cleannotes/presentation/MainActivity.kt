@@ -14,6 +14,7 @@ import com.sn.cleannotes.databinding.ActivityMainBinding
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         val navController = findNavController(R.id.navContiner)
         NavigationUI.setupActionBarWithNavController(this, navController)
     }

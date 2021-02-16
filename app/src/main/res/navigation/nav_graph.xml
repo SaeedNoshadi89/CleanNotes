@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/noteListFragment"
         android:name="com.sn.cleannotes.presentation.NoteListFragment"
-        android:label="fragment_note_list"
-        tools:layout="@layout/fragment_note_list" >
+        android:label="Notes List"
+        tools:layout="@layout/fragment_note_list">
         <action
             android:id="@+id/action_noteListFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment" />
@@ -17,10 +17,10 @@
     <fragment
         android:id="@+id/addNoteFragment"
         android:name="com.sn.cleannotes.presentation.AddNoteFragment"
-        android:label="fragment_add_note" >
+        android:label="Add Note">
         <argument
             android:name="noteId"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
     </fragment>
 </navigation>
