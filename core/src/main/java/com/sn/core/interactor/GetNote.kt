@@ -1,4 +1,4 @@
-package com.sn.core.interactors
+package com.sn.core.interactor
 
 import com.sn.core.repository.NoteRepository
 

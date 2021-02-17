@@ -1,9 +1,9 @@
 package com.sn.core.data
 
 data class Note(
-    private val id: Long = 0,
-    private val title: String,
-    private val content: String,
-    private val creationTime: Long,
-    private val updateTime: Long,
+     val id: Long = 0,
+     val title: String,
+     val content: String,
+     val creationTime: Long,
+     val updateTime: Long,
 )
