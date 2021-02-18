@@ -2,6 +2,9 @@ package com.sn.cleannotes.framework.di
 
 import android.content.Context
 import androidx.room.Room
+import com.sn.cleannotes.framework.IInteractions
+import com.sn.cleannotes.framework.InteractionsImpl
+import com.sn.cleannotes.framework.NoteViewModel
 import com.sn.cleannotes.framework.RoomNoteDataSource
 import com.sn.cleannotes.framework.db.Database
 import com.sn.cleannotes.framework.db.NoteDao
@@ -22,27 +25,44 @@ object AppModule {
     @Provides
     fun provideNoteDatabase(@ApplicationContext appContext: Context) =
         Room.databaseBuilder(appContext, Database::class.java, DB_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Singleton
     @Provides
     fun provideNoteDao(db: Database) = db.getNoteDao()
 
     @Provides
-    fun provideRoomNoteDataSource(@ApplicationContext appContext: Context, noteDao: NoteDao) =
-        RoomNoteDataSource(appContext, noteDao)
+    fun provideRoomNoteDataSource(noteDao: NoteDao) =
+        RoomNoteDataSource(noteDao)
 
     @Provides
     fun provideNoteRepository(roomNoteDataSource: RoomNoteDataSource) =
         NoteRepository(roomNoteDataSource)
 
-/*    @Binds
-    fun provideIntractors(
-        addNote: AddNote,
-        getAllNotes: GetAllNotes,
-        getNote: GetNote,
-        removeNote: RemoveNote
-    ): Interactors{
-        return Interactors(addNote, getAllNotes, getNote, removeNote)
-    }*/
+    @Provides
+    fun provideNoteViewModel(interactionsImpl: InteractionsImpl) =
+        NoteViewModel(interactionsImpl)
 
+/*    @Provides
+    fun provideAddNoteInteractor(noteRepository: NoteRepository) =
+        AddNote(noteRepository)
+
+    @Provides
+    fun provideGetAllNotesInteractor(noteRepository: NoteRepository) =
+        GetAllNotes(noteRepository)
+
+    @Provides
+    fun provideGetNoteInteractor(noteRepository: NoteRepository) =
+        GetNote(noteRepository)
+
+    @Provides
+    fun provideRemoveNoteInteractor(noteRepository: NoteRepository) =
+        RemoveNote(noteRepository)*/
+
+    @Provides
+    fun provideInteractions(noteRepository: NoteRepository): IInteractions {
+        return InteractionsImpl(noteRepository)
+    }
 }
+

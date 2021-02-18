@@ -49,6 +49,7 @@ dependencies {
     implementation AppDeps.lifecycleLiveData
     implementation AppDeps.lifecycleRuntime
     implementation AppDeps.lifecycleViewModel
+    implementation AppDeps.fragmentKtx
     implementation AppDeps.navigationFragmentKtx
     implementation AppDeps.navigationUiKtx
     implementation AppDeps.retrofit

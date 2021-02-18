@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.sn.cleannotes.databinding.FragmentNoteListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NoteListFragment : Fragment() {
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding

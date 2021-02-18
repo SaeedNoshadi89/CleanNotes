@@ -1,4 +1,4 @@
-  package com.sn.cleannotes.presentation
+package com.sn.cleannotes.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,9 +6,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.sn.cleannotes.R
 import com.sn.cleannotes.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-  class MainActivity : AppCompatActivity() {
-      private lateinit var binding: ActivityMainBinding
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,8 +22,8 @@ import com.sn.cleannotes.databinding.ActivityMainBinding
     }
 
 
-      override fun onSupportNavigateUp(): Boolean {
-          val navController = this.findNavController(R.id.navContiner)
-          return navController.navigateUp()
-      }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.navContiner)
+        return navController.navigateUp()
+    }
 }

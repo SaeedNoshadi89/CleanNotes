@@ -1,6 +1,5 @@
 package com.sn.cleannotes.framework
 
-import android.content.Context
 import com.sn.cleannotes.framework.db.NoteDao
 import com.sn.cleannotes.framework.db.NoteEntity
 import com.sn.core.data.Mapper
@@ -12,7 +11,6 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class RoomNoteDataSource @Inject constructor(
-    private val context: Context,
     private val noteDao: NoteDao
 ) : NoteDataSource, Mapper<NoteEntity, Note> {
     override suspend fun add(note: Note) = run {
@@ -21,7 +19,7 @@ class RoomNoteDataSource @Inject constructor(
         }
     }
 
-    override suspend fun get(id: Long): Flow<Note> = flow {
+    override fun get(id: Long): Flow<Note> = flow {
         noteDao.getNoteEntity(id).collect { noteEntity ->
             toNote(noteEntity).collect { note ->
                 emit(note)
@@ -29,7 +27,7 @@ class RoomNoteDataSource @Inject constructor(
         }
     }
 
-    override suspend fun getAll(): Flow<List<Note>> = flow {
+    override fun getAll(): Flow<List<Note>> = flow {
         noteDao.getAllNoteEntities().collect {
             it.map { noteEntity ->
                 toNote(noteEntity)

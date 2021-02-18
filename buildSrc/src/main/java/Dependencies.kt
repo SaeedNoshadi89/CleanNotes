@@ -14,6 +14,7 @@ object Versions {
     const val extJunit_version = "1.1.2"
     const val espressoCore_version = "3.3.0"
     const val lifecycle_version = "2.3.0"
+    const val fragmentKtx_version = "1.2.5"
     const val coroutines_version = "1.3.9"
     const val hilt_version = "2.28-alpha"
     const val hiltAndroidXVersion = "1.0.0-alpha02"
@@ -42,6 +43,7 @@ object AppDeps {
         "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_version}"
     const val lifecycleRuntime =
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_version}"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx_version}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
     const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
     const val gson = "com.google.code.gson:gson:${Versions.gson_version}"

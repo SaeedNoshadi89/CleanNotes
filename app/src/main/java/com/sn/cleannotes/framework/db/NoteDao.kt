@@ -13,10 +13,10 @@ interface NoteDao {
     suspend fun addNoteEntity(noteEntity: NoteEntity)
 
     @Query("SELECT * FROM note WHERE id = :id")
-    suspend fun getNoteEntity(id: Long): Flow<NoteEntity>
+    fun getNoteEntity(id: Long): Flow<NoteEntity>
 
-    @Query("SELECT 8 FROM note")
-    suspend fun getAllNoteEntities(): Flow<List<NoteEntity>>
+    @Query("SELECT * FROM note")
+    fun getAllNoteEntities(): Flow<List<NoteEntity>>
 
     @Delete
     suspend fun deleteNoteEntity(noteEntity: NoteEntity)
