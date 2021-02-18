@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class NoteViewModel @ViewModelInject constructor(
-    private val interactions: InteractionsImpl
+    private val noteInteractions: NoteInteractions
 ) : ViewModel() {
     private val saved = MutableStateFlow(false)
 
     fun saveNote(note: Note){
         viewModelScope.launch(Dispatchers.IO){
-            interactions.addNote(note)
+            noteInteractions.addNote(note)
             saved.value = true
         }
     }

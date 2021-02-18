@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+// this class is Note repository
 class RoomNoteDataSource @Inject constructor(
     private val noteDao: NoteDao
 ) : NoteDataSource, Mapper<NoteEntity, Note> {
