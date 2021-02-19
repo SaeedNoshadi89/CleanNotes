@@ -30,9 +30,9 @@ class NoteListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNoteListBinding.inflate(inflater, container, false)
-        noteListAdapter = NoteListAdapter {
+        noteListAdapter = NoteListAdapter( {
             navigateToNoteDetails(it)
-        }
+        })
         viewModel.getAllNotes()
         return binding?.root
     }
