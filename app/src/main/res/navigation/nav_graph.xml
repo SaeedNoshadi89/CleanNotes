@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/noteListFragment"
-        android:name="com.sn.cleannotes.presentation.NoteListFragment"
+        android:name="com.sn.cleannotes.presentation.ui.NoteListFragment"
         android:label="Notes List"
         tools:layout="@layout/fragment_note_list">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.sn.cleannotes.presentation.AddNoteFragment"
+        android:name="com.sn.cleannotes.presentation.ui.AddNoteFragment"
         android:label="Add Note">
         <argument
             android:name="noteId"

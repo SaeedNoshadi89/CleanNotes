@@ -1,4 +1,4 @@
-package com.sn.cleannotes.framework
+package com.sn.cleannotes.framework.repository
 
 import com.sn.cleannotes.framework.db.NoteDao
 import com.sn.cleannotes.framework.db.NoteEntity
@@ -28,7 +28,7 @@ class RoomNoteDataSource @Inject constructor(
         }
     }
 
-    override fun getAll(): Flow<List<Note>> = flow {
+    override fun getAll(): Flow<MutableList<Note>> = flow {
         noteDao.getAllNoteEntities().collect {
             it.map { noteEntity ->
                 toNote(noteEntity)

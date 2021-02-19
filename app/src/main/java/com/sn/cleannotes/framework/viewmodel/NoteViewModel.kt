@@ -1,8 +1,9 @@
-package com.sn.cleannotes.framework
+package com.sn.cleannotes.framework.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sn.cleannotes.framework.repository.NoteInteractions
 import com.sn.core.data.Note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

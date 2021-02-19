@@ -1,4 +1,4 @@
-package com.sn.cleannotes.presentation
+package com.sn.cleannotes.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.sn.cleannotes.presentation
+package com.sn.cleannotes.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sn.cleannotes.databinding.FragmentAddNoteBinding
-import com.sn.cleannotes.framework.NoteViewModel
+import com.sn.cleannotes.framework.viewmodel.NoteViewModel
 import com.sn.core.data.Note
 import com.sn.core.util.Extension.checkStringNotNullOrEmpty
 import dagger.hilt.android.AndroidEntryPoint

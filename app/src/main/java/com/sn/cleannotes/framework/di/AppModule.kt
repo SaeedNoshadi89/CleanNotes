@@ -2,11 +2,13 @@ package com.sn.cleannotes.framework.di
 
 import android.content.Context
 import androidx.room.Room
-import com.sn.cleannotes.framework.NoteInteractions
-import com.sn.cleannotes.framework.NoteViewModel
-import com.sn.cleannotes.framework.RoomNoteDataSource
 import com.sn.cleannotes.framework.db.Database
 import com.sn.cleannotes.framework.db.NoteDao
+import com.sn.cleannotes.framework.repository.NoteInteractions
+import com.sn.cleannotes.framework.repository.RoomNoteDataSource
+import com.sn.cleannotes.framework.viewmodel.NoteListViewModel
+import com.sn.cleannotes.framework.viewmodel.NoteViewModel
+import com.sn.cleannotes.presentation.adapter.NoteListAdapter
 import com.sn.core.interactor.AddNote
 import com.sn.core.interactor.GetAllNotes
 import com.sn.core.interactor.GetNote
@@ -46,6 +48,15 @@ object AppModule {
     @Provides
     fun provideNoteViewModel(noteInteractions: NoteInteractions) =
         NoteViewModel(noteInteractions)
+
+    @Provides
+    fun provideNoteListViewModel(noteInteractions: NoteInteractions) =
+        NoteListViewModel(noteInteractions)
+
+    @Singleton
+    @Provides
+    fun provideNoteListAdapter() =
+        NoteListAdapter()
 
     @Provides
     fun provideNoteInteractions(repository: NoteRepository) = NoteInteractions(
