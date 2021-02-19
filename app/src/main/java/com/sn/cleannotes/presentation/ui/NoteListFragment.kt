@@ -21,6 +21,7 @@ class NoteListFragment : Fragment() {
     private var _binding: FragmentNoteListBinding? = null
     private val binding get() = _binding
     private val viewModel by viewModels<NoteListViewModel>()
+
     @Inject
     lateinit var noteListAdapter: NoteListAdapter
 
@@ -28,8 +29,10 @@ class NoteListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      _binding = FragmentNoteListBinding.inflate(inflater, container, false)
-        noteListAdapter = NoteListAdapter()
+        _binding = FragmentNoteListBinding.inflate(inflater, container, false)
+        noteListAdapter = NoteListAdapter {
+            navigateToNoteDetails(it)
+        }
         viewModel.getAllNotes()
         return binding?.root
     }
@@ -46,26 +49,29 @@ class NoteListFragment : Fragment() {
             getAllNotes(this)
         }
     }
-    private fun getAllNotes(binding: FragmentNoteListBinding){
+
+    private fun getAllNotes(binding: FragmentNoteListBinding) {
         lifecycleScope.launch {
             viewModel.getAllNotesState().collect {
-                it.let {noteList ->
+                it.let { noteList ->
                     binding.let { view ->
                         view.progressBar.visibility = View.GONE
                         view.rvNoteList.visibility = View.VISIBLE
                     }
-                    noteListAdapter.differ.submitList(noteList.sortedByDescending {sort -> sort.updateTime })
+                    noteListAdapter.differ.submitList(noteList.sortedByDescending { sort -> sort.updateTime })
                 }
             }
         }
     }
-    private fun navigateToNoteDetails(id: Long = 0L){
+
+    private fun navigateToNoteDetails(id: Long = 0L) {
         findNavController().navigate(
             NoteListFragmentDirections.actionNoteListFragmentToAddNoteFragment(
                 id
             )
         )
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -11,7 +11,9 @@ import com.sn.core.data.Note
 import com.sn.core.util.Extension.dateFormat
 import javax.inject.Inject
 
-class NoteListAdapter @Inject constructor(): RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+class NoteListAdapter @Inject constructor(
+    private val onClick: (id: Long) -> Unit
+) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<Note>() {
         override fun areItemsTheSame(oldItem: Note, newItem: Note) =
@@ -26,7 +28,7 @@ class NoteListAdapter @Inject constructor(): RecyclerView.Adapter<NoteListAdapte
 
     val differ = AsyncListDiffer(this, differCallback)
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder.bind(differ.currentList[position])
+        holder.bind(differ.currentList[position], onClick)
     }
 
     override fun getItemCount(): Int =
@@ -37,12 +39,16 @@ class NoteListAdapter @Inject constructor(): RecyclerView.Adapter<NoteListAdapte
 
     inner class NoteViewHolder(private val itemNoteBinding: ItemNoteBinding) :
         RecyclerView.ViewHolder(itemNoteBinding.root) {
-        fun bind(note: Note) {
+        fun bind(note: Note, onClick: (id: Long) -> Unit) {
             itemNoteBinding.apply {
                 tvTitle.text = note.title
                 tvContent.text = note.content
-                tvDate.context.resources.getString(R.string.last_updated) + note.updateTime.dateFormat().let {
-                    tvDate.text = it
+                tvDate.context.resources.getString(R.string.last_updated) + note.updateTime.dateFormat()
+                    .let {
+                        tvDate.text = it
+                    }
+                root.setOnClickListener {
+                    onClick(note.id)
                 }
             }
         }

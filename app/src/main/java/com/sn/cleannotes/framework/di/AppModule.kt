@@ -55,8 +55,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNoteListAdapter() =
-        NoteListAdapter()
+    fun provideNoteListAdapter(onClick: (id: Long) -> Unit) =
+        NoteListAdapter(onClick)
 
     @Provides
     fun provideNoteInteractions(repository: NoteRepository) = NoteInteractions(
