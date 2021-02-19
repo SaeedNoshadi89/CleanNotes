@@ -1,6 +1,5 @@
 package com.sn.cleannotes.framework.viewmodel
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,8 +19,6 @@ class NoteListViewModel @ViewModelInject constructor(
     fun getAllNotes(){
         viewModelScope.launch(Dispatchers.IO){
             noteInteractions.getAllNotes.invoke().collect {
-                Log.e("TTT", it.size.toString())
-
                 notes.value = it
             }
         }
