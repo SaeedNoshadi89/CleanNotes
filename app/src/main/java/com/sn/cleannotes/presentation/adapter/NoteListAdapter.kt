@@ -9,10 +9,9 @@ import com.sn.cleannotes.R
 import com.sn.cleannotes.databinding.ItemNoteBinding
 import com.sn.core.data.Note
 import com.sn.core.util.Extension.dateFormat
-import javax.inject.Inject
 
-class NoteListAdapter @Inject constructor(
-    private val onClick: (id: Long) -> Unit
+class NoteListAdapter constructor(
+    private val onClick: (note: Note, toBeDelete: Boolean) -> Unit
 ) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<Note>() {
@@ -39,7 +38,7 @@ class NoteListAdapter @Inject constructor(
 
     inner class NoteViewHolder(private val itemNoteBinding: ItemNoteBinding) :
         RecyclerView.ViewHolder(itemNoteBinding.root) {
-        fun bind(note: Note, onClick: (id: Long) -> Unit) {
+        fun bind(note: Note, onClick: (note: Note, toBeDelete: Boolean) -> Unit) {
             itemNoteBinding.apply {
                 tvTitle.text = note.title
                 tvContent.text = note.content
@@ -47,8 +46,11 @@ class NoteListAdapter @Inject constructor(
                     .let {
                         tvDate.text = it
                     }
-                root.setOnClickListener {
-                    onClick(note.id)
+                noteLayout.setOnClickListener {
+                    onClick(note, false)
+                }
+                imgDelete.setOnClickListener {
+                    onClick(note, true)
                 }
             }
         }

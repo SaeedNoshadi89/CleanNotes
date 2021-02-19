@@ -7,8 +7,7 @@ import com.sn.cleannotes.framework.db.NoteDao
 import com.sn.cleannotes.framework.repository.NoteInteractions
 import com.sn.cleannotes.framework.repository.RoomNoteDataSource
 import com.sn.cleannotes.framework.viewmodel.NoteListViewModel
-import com.sn.cleannotes.framework.viewmodel.NoteViewModel
-import com.sn.cleannotes.presentation.adapter.NoteListAdapter
+import com.sn.cleannotes.framework.viewmodel.AddNoteViewModel
 import com.sn.core.interactor.AddNote
 import com.sn.core.interactor.GetAllNotes
 import com.sn.core.interactor.GetNote
@@ -47,16 +46,11 @@ object AppModule {
 
     @Provides
     fun provideNoteViewModel(noteInteractions: NoteInteractions) =
-        NoteViewModel(noteInteractions)
+        AddNoteViewModel(noteInteractions)
 
     @Provides
     fun provideNoteListViewModel(noteInteractions: NoteInteractions) =
         NoteListViewModel(noteInteractions)
-
-    @Singleton
-    @Provides
-    fun provideNoteListAdapter(onClick: (id: Long) -> Unit) =
-        NoteListAdapter(onClick)
 
     @Provides
     fun provideNoteInteractions(repository: NoteRepository) = NoteInteractions(

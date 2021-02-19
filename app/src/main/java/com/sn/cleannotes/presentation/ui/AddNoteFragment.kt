@@ -9,20 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.sn.cleannotes.databinding.FragmentAddNoteBinding
-import com.sn.cleannotes.framework.viewmodel.NoteViewModel
+import com.sn.cleannotes.framework.viewmodel.AddNoteViewModel
 import com.sn.core.data.Note
 import com.sn.core.util.Extension.checkStringNotNullOrEmpty
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddNoteFragment : Fragment() {
 
     private var _binding: FragmentAddNoteBinding? = null
     private val binding get() = _binding
-    private val viewModel by viewModels<NoteViewModel>()
+    private val viewModel by viewModels<AddNoteViewModel>()
+    private val args by navArgs<AddNoteFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,29 +35,54 @@ class AddNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding?.apply {
+        binding?.apply {
             btnCheck.setOnClickListener {
-                if (!etTitle.text.toString().checkStringNotNullOrEmpty() or !etContent.text.toString().checkStringNotNullOrEmpty()){
+                if (!etTitle.text.toString()
+                        .checkStringNotNullOrEmpty() or !etContent.text.toString()
+                        .checkStringNotNullOrEmpty()
+                ) {
                     saveNewNote()
-                }else{
+                } else {
                     findNavController().popBackStack()
                 }
             }
             collectSavedState()
+            fetchCurrentNote(args.noteId)
+            collectCurrentState(this)
         }
     }
 
     private fun collectSavedState() {
-        lifecycleScope.launch {
-            viewModel.getSavedState().collect {
-                if (it){
+        lifecycleScope.launchWhenResumed {
+            viewModel.getSavedState.collect {
+                if (it) {
                     Toast.makeText(requireContext(), "Done", Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
-                }else{
-                    Toast.makeText(requireContext(), "Something went wrong, Please try again", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Something went wrong, Please try again",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
+    }
+
+    private fun collectCurrentState(binding: FragmentAddNoteBinding) {
+        lifecycleScope.launchWhenResumed {
+            viewModel.getCurrentNote.collect {
+                binding.apply {
+                    etTitle.setText(it.title)
+                    etContent.setText(it.content)
+                }
+            }
+        }
+    }
+
+    private fun fetchCurrentNote(noteId: Long) {
+        if (noteId != 0L)
+            viewModel.fetchCurrentNote(noteId)
     }
 
     private fun FragmentAddNoteBinding.saveNewNote() {

@@ -15,6 +15,7 @@ class NoteListViewModel @ViewModelInject constructor(
     private val noteInteractions: NoteInteractions
 ) : ViewModel() {
     private val notes = MutableStateFlow<MutableList<Note>>(mutableListOf())
+    private val deletedNote = MutableStateFlow(false)
 
     fun getAllNotes(){
         viewModelScope.launch(Dispatchers.IO){
@@ -24,6 +25,14 @@ class NoteListViewModel @ViewModelInject constructor(
         }
     }
 
-    fun getAllNotesState(): StateFlow<MutableList<Note>> = notes
+    val getAllNotesState: StateFlow<MutableList<Note>> = notes
+
+    fun fetchDeleteNote(note: Note){
+        viewModelScope.launch {
+            noteInteractions.removeNote(note)
+            deletedNote.value = true
+        }
+    }
+    val getDeletedNote: StateFlow<Boolean> = deletedNote
 
 }
