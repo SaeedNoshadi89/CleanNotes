@@ -30,6 +30,6 @@ Currently the following functions are implemented:
 * Saeed Noshadi - Email: (SaeedNoshadi89@gmail.com, Saeed.dev68@gmail.com)
 
 
-                                                             GNU GENERAL PUBLIC LICENSE
-                                                               Version 3, 29 June 2007
+                                         GNU GENERAL PUBLIC LICENSE
+                                           Version 3, 29 June 2007
                    
