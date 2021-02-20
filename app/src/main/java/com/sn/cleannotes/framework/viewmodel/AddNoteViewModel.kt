@@ -6,28 +6,22 @@ import androidx.lifecycle.viewModelScope
 import com.sn.cleannotes.framework.repository.NoteInteractions
 import com.sn.core.data.Note
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class AddNoteViewModel @ViewModelInject constructor(
     private val noteInteractions: NoteInteractions
 ) : ViewModel() {
-    private val saved = MutableStateFlow(false)
+
     private val currentNote =
         MutableStateFlow(Note(title = "", content = "", creationTime = 0L, updateTime = 0L))
     private val deletedNote = MutableStateFlow(false)
 
 
-    fun saveNote(note: Note) {
-        viewModelScope.launch(Dispatchers.IO) {
-            noteInteractions.addNote(note)
-            saved.value = true
-        }
-    }
-
-    val getSavedState: StateFlow<Boolean> = saved
+    fun saveNote(note: Note) = flow {
+        noteInteractions.addNote(note)
+        emit(true)
+    }.flowOn(Dispatchers.IO)
 
     fun fetchCurrentNote(id: Long) {
         viewModelScope.launch {
