@@ -6,4 +6,5 @@ data class Note(
     var content: String,
     var creationTime: Long,
     var updateTime: Long,
+    var wordCount: Int = 0
 )

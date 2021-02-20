@@ -8,10 +8,7 @@ import com.sn.cleannotes.framework.repository.NoteInteractions
 import com.sn.cleannotes.framework.repository.RoomNoteDataSource
 import com.sn.cleannotes.framework.viewmodel.NoteListViewModel
 import com.sn.cleannotes.framework.viewmodel.AddNoteViewModel
-import com.sn.core.interactor.AddNote
-import com.sn.core.interactor.GetAllNotes
-import com.sn.core.interactor.GetNote
-import com.sn.core.interactor.RemoveNote
+import com.sn.core.interactor.*
 import com.sn.core.repository.NoteRepository
 import com.sn.core.util.Constant.DB_NAME
 import dagger.Module
@@ -57,7 +54,8 @@ object AppModule {
         AddNote(repository),
         GetAllNotes(repository),
         GetNote(repository),
-        RemoveNote(repository)
+        RemoveNote(repository),
+        GetWordCount()
     )
 }
 

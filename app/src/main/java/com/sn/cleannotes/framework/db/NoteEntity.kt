@@ -13,5 +13,5 @@ data class NoteEntity(
  @ColumnInfo(name = "creation_date")
  val creationTime: Long = 0L,
  @ColumnInfo(name = "update_time")
- val updateTime: Long = 0L,
+ val updateTime: Long = 0L
 )

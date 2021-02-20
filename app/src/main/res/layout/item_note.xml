@@ -44,36 +44,35 @@
             android:id="@+id/tvContentLable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:maxLines="1"
             android:text="@string/content"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/tvTitleLable"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleLable" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/imgDelete"
             app:layout_constraintEnd_toEndOf="@+id/tvTitle"
             app:layout_constraintStart_toEndOf="@+id/tvContentLable"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintTop_toTopOf="@+id/tvContentLable"
             tools:text="@string/content" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDateLable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="@string/last_updated"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvContentLable" />
+            app:layout_constraintBottom_toTopOf="@+id/tvWordCountLable"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContentLable" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDate"
@@ -81,11 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDateLable"
             app:layout_constraintEnd_toStartOf="@+id/imgDelete"
             app:layout_constraintStart_toEndOf="@+id/tvDateLable"
-            app:layout_constraintTop_toTopOf="@+id/tvDateLable"
             tools:text="@string/last_updated" />
 
 
@@ -93,18 +90,30 @@
             android:id="@+id/imgDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvDate"
             app:srcCompat="@drawable/ic_delete" />
 
-        <!--        <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/wordCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Words: "
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvWordCountLable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/words"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvWordCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvWordCountLable"
+            app:layout_constraintStart_toEndOf="@+id/tvWordCountLable"
+            app:layout_constraintTop_toTopOf="@+id/tvWordCountLable"
+            tools:text="Words: " />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

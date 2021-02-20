@@ -44,6 +44,7 @@ class NoteListAdapter constructor(
                 tvTitle.text = note.title
                 tvContent.text = note.content
                 tvDate.text = note.updateTime.dateFormat()
+                tvWordCount.text = "${note.wordCount}"
 
                 noteLayout.setOnClickListener {
                     onClick(note, false)

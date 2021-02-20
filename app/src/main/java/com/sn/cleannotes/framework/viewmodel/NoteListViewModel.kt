@@ -19,8 +19,13 @@ class NoteListViewModel @ViewModelInject constructor(
 
     fun getAllNotes(){
         viewModelScope.launch(Dispatchers.IO){
-            noteInteractions.getAllNotes.invoke().collect {
-                notes.value = it
+            noteInteractions.apply {
+                getAllNotes.invoke().collect {
+                    it.forEach {note ->
+                        note.wordCount = getWordCount(note)
+                    }
+                    notes.value = it
+                }
             }
         }
     }
