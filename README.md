@@ -20,8 +20,6 @@ Currently the following functions are implemented:
 ![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/summary.png)
 ![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/jetpack.png)
 ![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/kotlin.png)
-![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/studio.png)
-![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/app_bundle.png)
 
 
 ## Developed with love and passion by
