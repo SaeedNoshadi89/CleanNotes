@@ -8,12 +8,13 @@ In this project, the following capabilities have been used:
 
 Currently the following functions are implemented:
 
-* Clean Architecture
+* Clean Architecture(Modular)
 * MVVM Design Pattern
 * Coroutines
 * Coroutines Flow and StateFlow
 * Dependency Injection with <b>dagger Hilt</b>
 * Android Architecture Components(Room database, Navigation Component)
+* Kotlin DSL for dependencies
 
 ## MAD SCORECARD
 
