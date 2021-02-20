@@ -50,19 +50,26 @@ class NoteListFragment : Fragment() {
                 adapter = noteListAdapter
             }
             getAllNotes(this)
+            collectDeletedNoteState()
         }
-        getDeletedNote()
     }
 
     private fun getAllNotes(binding: FragmentNoteListBinding) {
         lifecycleScope.launchWhenResumed {
             viewModel.getAllNotesState.collect {
-                it.let { noteList ->
+                if (!it.isNullOrEmpty() && it.size > 0){
                     binding.let { view ->
                         view.progressBar.visibility = View.GONE
+                        view.tvEmpty.visibility = View.GONE
                         view.rvNoteList.visibility = View.VISIBLE
                     }
-                    noteListAdapter.differ.submitList(noteList.sortedByDescending { sort -> sort.updateTime })
+                    noteListAdapter.differ.submitList(it.sortedByDescending { sort -> sort.updateTime })
+                }else{
+                    binding.let { view ->
+                        view.progressBar.visibility = View.GONE
+                        view.rvNoteList.visibility = View.GONE
+                        view.tvEmpty.visibility = View.VISIBLE
+                    }
                 }
             }
         }
@@ -72,14 +79,14 @@ class NoteListFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Delete note")
             .setMessage("Are you sure you want to delete this note?")
-            .setPositiveButton("Yes") { di, i ->
+            .setPositiveButton("Yes") { _, _ ->
                 viewModel.fetchDeleteNote(note)
-            }.setNegativeButton("No") { di, i -> }
+            }.setNegativeButton("No") { _, _ -> }
             .create()
             .show()
     }
 
-    private fun getDeletedNote() {
+    private fun collectDeletedNoteState() {
         lifecycleScope.launch {
             viewModel.getDeletedNote.collect {
                 if (it) {

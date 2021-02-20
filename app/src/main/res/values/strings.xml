@@ -3,7 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_note_button_cd">button add note</string>
-    <string name="content">Content</string>
-    <string name="title">Title</string>
+    <string name="content">Content: </string>
+    <string name="title">Title: </string>
     <string name="last_updated">Last updated: </string>
+    <string name="delete">delete</string>
+    <string name="you_dont_have_any_note">Note list is empty</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.sn.cleannotes.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -42,10 +43,8 @@ class NoteListAdapter constructor(
             itemNoteBinding.apply {
                 tvTitle.text = note.title
                 tvContent.text = note.content
-                tvDate.context.resources.getString(R.string.last_updated) + note.updateTime.dateFormat()
-                    .let {
-                        tvDate.text = it
-                    }
+                tvDate.text = note.updateTime.dateFormat()
+
                 noteLayout.setOnClickListener {
                     onClick(note, false)
                 }

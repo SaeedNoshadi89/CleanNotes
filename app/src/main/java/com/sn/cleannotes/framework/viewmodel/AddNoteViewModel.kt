@@ -15,17 +15,21 @@ class AddNoteViewModel @ViewModelInject constructor(
     private val noteInteractions: NoteInteractions
 ) : ViewModel() {
     private val saved = MutableStateFlow(false)
-    private val currentNote = MutableStateFlow(Note(title = "", content = "", creationTime = 0L, updateTime = 0L))
+    private val currentNote =
+        MutableStateFlow(Note(title = "", content = "", creationTime = 0L, updateTime = 0L))
+    private val deletedNote = MutableStateFlow(false)
 
-    fun saveNote(note: Note){
-        viewModelScope.launch(Dispatchers.IO){
+
+    fun saveNote(note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
             noteInteractions.addNote(note)
             saved.value = true
         }
     }
+
     val getSavedState: StateFlow<Boolean> = saved
 
-    fun fetchCurrentNote(id: Long){
+    fun fetchCurrentNote(id: Long) {
         viewModelScope.launch {
             noteInteractions.getNote.invoke(id).collect {
                 currentNote.value = it
@@ -34,4 +38,19 @@ class AddNoteViewModel @ViewModelInject constructor(
     }
 
     val getCurrentNote: StateFlow<Note> = currentNote
+
+
+    fun fetchDeleteNote(id: Long) {
+        viewModelScope.launch {
+            noteInteractions.apply {
+                getNote.invoke(id).collect {
+                    removeNote(it)
+                    deletedNote.value = true
+                }
+            }
+
+        }
+    }
+
+    val getDeletedNote: StateFlow<Boolean> = deletedNote
 }

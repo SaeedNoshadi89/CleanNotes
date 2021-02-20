@@ -1,21 +1,22 @@
 package com.sn.cleannotes.presentation.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.sn.cleannotes.R
 import com.sn.cleannotes.databinding.FragmentAddNoteBinding
 import com.sn.cleannotes.framework.viewmodel.AddNoteViewModel
 import com.sn.core.data.Note
 import com.sn.core.util.Extension.checkStringNotNullOrEmpty
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddNoteFragment : Fragment() {
@@ -36,6 +37,8 @@ class AddNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
+//            setHasOptionsMenu(true)
+
             btnCheck.setOnClickListener {
                 if (!etTitle.text.toString()
                         .checkStringNotNullOrEmpty() or !etContent.text.toString()
@@ -49,7 +52,23 @@ class AddNoteFragment : Fragment() {
             collectSavedState()
             fetchCurrentNote(args.noteId)
             collectCurrentState(this)
+            collectDeletedNoteState()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.delete ->{
+                if (context != null && args.noteId != 0L){
+                    deleteNote(args.noteId)
+                }
+            }
+        }
+        return true
     }
 
     private fun collectSavedState() {
@@ -98,6 +117,32 @@ class AddNoteFragment : Fragment() {
         }.run {
             viewModel.saveNote(this)
         }
+    }
+
+    private fun collectDeletedNoteState() {
+        lifecycleScope.launch {
+            viewModel.getDeletedNote.collect {
+                if (it) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Deleted note is successful",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    findNavController().popBackStack()
+                }
+            }
+        }
+    }
+
+    private fun deleteNote(id: Long) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete note")
+            .setMessage("Are you sure you want to delete this note?")
+            .setPositiveButton("Yes") { _, _ ->
+                viewModel.fetchDeleteNote(id)
+            }.setNegativeButton("No") { _, _ -> }
+            .create()
+            .show()
     }
 
     override fun onDestroyView() {

@@ -42,33 +42,9 @@ class RoomNoteDataSource @Inject constructor(
         }
     }
 
-    override fun fromNoteFlow(m: Note): Flow<NoteEntity> = flow {
-        emit(
-            NoteEntity(
-                id = m.id,
-                title = m.title,
-                content = m.content,
-                creationTime = m.creationTime,
-                updateTime = m.updateTime
-            )
-        )
-    }
-
-    override fun toNoteFlow(e: NoteEntity): Flow<Note> = flow {
-        emit(
-            Note(
-                id = e.id,
-                title = e.title,
-                content = e.content,
-                creationTime = e.creationTime,
-                updateTime = e.updateTime
-            )
-        )
-    }
-
-    override fun fromNoteListFlow(tm: MutableList<Note>): Flow<MutableList<NoteEntity>> = flow {
-        emit(
-            tm.map {
+    override fun fromNoteFlow(m: Note?): Flow<NoteEntity> = flow {
+        m?.let {
+            emit(
                 NoteEntity(
                     id = it.id,
                     title = it.title,
@@ -76,13 +52,13 @@ class RoomNoteDataSource @Inject constructor(
                     creationTime = it.creationTime,
                     updateTime = it.updateTime
                 )
-            }.toMutableList()
-        )
+            )
+        }
     }
 
-    override fun toNoteListFlow(te: MutableList<NoteEntity>): Flow<MutableList<Note>> = flow {
-        emit(
-            te.map {
+    override fun toNoteFlow(e: NoteEntity?): Flow<Note> = flow {
+        e?.let {
+            emit(
                 Note(
                     id = it.id,
                     title = it.title,
@@ -90,7 +66,39 @@ class RoomNoteDataSource @Inject constructor(
                     creationTime = it.creationTime,
                     updateTime = it.updateTime
                 )
-            }.toMutableList()
-        )
+            )
+        }
+    }
+
+    override fun fromNoteListFlow(tm: MutableList<Note>?): Flow<MutableList<NoteEntity>> = flow {
+        tm?.let {
+            emit(
+                tm.map {
+                    NoteEntity(
+                        id = it.id,
+                        title = it.title,
+                        content = it.content,
+                        creationTime = it.creationTime,
+                        updateTime = it.updateTime
+                    )
+                }.toMutableList()
+            )
+        }
+    }
+
+    override fun toNoteListFlow(te: MutableList<NoteEntity>?): Flow<MutableList<Note>> = flow {
+        te?.let {
+            emit(
+                te.map {
+                    Note(
+                        id = it.id,
+                        title = it.title,
+                        content = it.content,
+                        creationTime = it.creationTime,
+                        updateTime = it.updateTime
+                    )
+                }.toMutableList()
+            )
+        }
     }
 }
