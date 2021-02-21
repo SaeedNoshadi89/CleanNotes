@@ -7,6 +7,9 @@ In this project, the following capabilities have been used:
 
 <td align="center"> <img src="MadShots/clean.png" width="600" ></td>
 
+
+
+
 <td align="center"> <img src="MadShots/final-architecture.png" width="800" ></td>
 
 
