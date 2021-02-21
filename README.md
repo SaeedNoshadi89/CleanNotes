@@ -4,6 +4,12 @@ CleanNote is <b>open-source</b> application based on <b>Clean Architecture</b> .
 
 In this project, the following capabilities have been used:
 
+
+<td align="center"> <img src="MadShots/Graph-1.png" width="800" ></td>
+
+<td align="center"> <img src="MadShots/final-architecture.png" width="800" ></td>
+
+
 ## Features
 
 Currently the following functions are implemented:
@@ -18,9 +24,11 @@ Currently the following functions are implemented:
 
 ## MAD SCORECARD
 
-![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/summary.png)
-![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/jetpack.png)
-![](https://github.com/SaeedNoshadi89/CleanNotes/blob/master/MadShots/kotlin.png)
+<td align="center"> <img src="MadShots/summary.png" width="800" ></td>
+<td align="center"> <img src="MadShots/jetpack.png" width="800" ></td>
+<td align="center"> <img src="MadShots/kotlin.png" width="800" ></td>
+
+
 
 
 ## Developed with love and passion by
