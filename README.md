@@ -5,7 +5,7 @@ CleanNote is <b>open-source</b> application based on <b>Clean Architecture</b> .
 In this project, the following capabilities have been used:
 
 
-<td align="center"> <img src="MadShots/clean1.png" width="600" ></td>
+<td align="center"> <img src="MadShots/clean1.png" width="800" ></td>
 
 
 
