@@ -1,6 +1,6 @@
 # CleanNotes
 
-CleanNote is <b>open-source</b> application based on <b>Clean Architecture</b> .
+CleanNote is an <b>open-source</b> application based on <b>Clean Architecture</b> .
 
 In this project, the following capabilities have been used:
 
